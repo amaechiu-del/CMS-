@@ -1,0 +1,61 @@
+# Netlify _redirects file
+# All parked domains redirect to domislink.com (301 Permanent)
+
+# Primary Brand Domains
+https://domislink.ng/*          https://domislink.com/:splat  301!
+https://www.domislink.ng/*      https://domislink.com/:splat  301!
+https://domislink.io/*          https://domislink.com/:splat  301!
+https://www.domislink.io/*      https://domislink.com/:splat  301!
+https://domislink.ai/*          https://domislink.com/:splat  301!
+https://www.domislink.ai/*      https://domislink.com/:splat  301!
+https://domis.link/*            https://domislink.com/:splat  301!
+https://www.domis.link/*        https://domislink.com/:splat  301!
+https://getdomislink.com/*      https://domislink.com/:splat  301!
+https://www.getdomislink.com/*  https://domislink.com/:splat  301!
+
+# Hosting Domains
+https://domishost.com/*         https://domislink.com/:splat  301!
+https://www.domishost.com/*     https://domislink.com/:splat  301!
+https://domiscloud.com/*        https://domislink.com/:splat  301!
+https://www.domiscloud.com/*    https://domislink.com/:splat  301!
+https://hostdomis.com/*         https://domislink.com/:splat  301!
+https://www.hostdomis.com/*     https://domislink.com/:splat  301!
+https://aihost.ng/*             https://domislink.com/:splat  301!
+https://www.aihost.ng/*         https://domislink.com/:splat  301!
+
+# CMS Domains
+https://domiscms.com/*          https://domislink.com/:splat  301!
+https://www.domiscms.com/*      https://domislink.com/:splat  301!
+https://domisbuilder.com/*      https://domislink.com/:splat  301!
+https://www.domisbuilder.com/*  https://domislink.com/:splat  301!
+https://buildwithdomis.com/*    https://domislink.com/:splat  301!
+https://www.buildwithdomis.com/* https://domislink.com/:splat  301!
+
+# Nigerian Market Domains
+https://domislink.com.ng/*      https://domislink.com/:splat  301!
+https://www.domislink.com.ng/*  https://domislink.com/:splat  301!
+https://nairahost.com/*         https://domislink.com/:splat  301!
+https://www.nairahost.com/*     https://domislink.com/:splat  301!
+https://hostnaija.com/*         https://domislink.com/:splat  301!
+https://www.hostnaija.com/*     https://domislink.com/:splat  301!
+
+# Creative/Branding Domains
+https://zeroeffort.host/*       https://domislink.com/:splat  301!
+https://www.zeroeffort.host/*   https://domislink.com/:splat  301!
+https://autopilothost.com/*     https://domislink.com/:splat  301!
+https://www.autopilothost.com/* https://domislink.com/:splat  301!
+https://aiwebhost.com/*         https://domislink.com/:splat  301!
+https://www.aiwebhost.com/*     https://domislink.com/:splat  301!
+https://hostmars.com/*          https://domislink.com/:splat  301!
+https://www.hostmars.com/*      https://domislink.com/:splat  301!
+https://mars.host/*             https://domislink.com/:splat  301!
+https://www.mars.host/*         https://domislink.com/:splat  301!
+https://tomars.io/*             https://domislink.com/:splat  301!
+https://www.tomars.io/*         https://domislink.com/:splat  301!
+https://directstack.com/*       https://domislink.com/:splat  301!
+https://www.directstack.com/*   https://domislink.com/:splat  301!
+https://99ai.host/*             https://domislink.com/:splat  301!
+https://www.99ai.host/*         https://domislink.com/:splat  301!
+
+# WWW redirect for main domain
+https://www.domislink.com/*     https://domislink.com/:splat  301!

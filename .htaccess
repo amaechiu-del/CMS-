@@ -1,0 +1,117 @@
+# ═══════════════════════════════════════════════════════════════
+# DOMISLINK DOMAIN PARKING - APACHE .HTACCESS
+# All domains redirect to https://domislink.com
+# ═══════════════════════════════════════════════════════════════
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# PRIMARY BRAND DOMAINS
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domislink\.ng$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domislink\.io$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domislink\.ai$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domis\.link$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?getdomislink\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# HOSTING DOMAINS
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domishost\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domiscloud\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?hostdomis\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?aihost\.ng$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# CMS DOMAINS
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domiscms\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domisbuilder\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?buildwithdomis\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# NIGERIAN MARKET DOMAINS
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^(www\.)?domislink\.com\.ng$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?nairahost\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?hostnaija\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# CREATIVE/BRANDING DOMAINS
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^(www\.)?zeroeffort\.host$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?autopilothost\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?aiwebhost\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?hostmars\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?mars\.host$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?tomars\.io$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?directstack\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?99ai\.host$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# WWW TO NON-WWW (Main Domain)
+# ═══════════════════════════════════════════════════════════════
+
+RewriteCond %{HTTP_HOST} ^www\.domislink\.com$ [NC]
+RewriteRule ^(.*)$ https://domislink.com/$1 [L,R=301]
+
+# ═══════════════════════════════════════════════════════════════
+# SECURITY HEADERS
+# ═══════════════════════════════════════════════════════════════
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

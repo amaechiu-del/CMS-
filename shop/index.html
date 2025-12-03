@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomisLink Shop | Themes, Plugins & Templates</title>
+    <meta name="description" content="Premium themes, plugins, and templates for DomisLink CMS. AI-powered marketplace for Nigerian businesses.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+    <style>
+        :root { --neon: #EEFF00; --dark: #0a0a0a; --darker: #050505; --card: #111; --border: #222; --text: #fff; --text-dim: #888; --success: #00ff88; --warning: #ffaa00; --ai-blue: #00d4ff; --ai-purple: #aa66ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        
+        header { padding: 15px 0; border-bottom: 1px solid var(--border); background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--success), var(--neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+        .logo span { color: var(--neon); }
+        
+        .search-box { flex: 1; max-width: 600px; position: relative; }
+        .search-box input { width: 100%; padding: 14px 20px 14px 50px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); color: var(--text); font-size: 1rem; }
+        .search-box input:focus { border-color: var(--ai-blue); outline: none; }
+        .search-box::before { content: '🔍'; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .btn { padding: 12px 25px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; transition: all 0.3s; }
+        .btn-primary { background: var(--neon); color: #000; }
+        .btn-cart { background: var(--card); color: var(--text); border: 1px solid var(--border); position: relative; }
+        .btn-cart .badge { position: absolute; top: -5px; right: -5px; width: 20px; height: 20px; background: var(--success); color: #000; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        
+        /* Hero */
+        .hero { padding: 60px 0; text-align: center; background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%); }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--success), var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-dim); font-size: 1.2rem; margin-bottom: 30px; }
+        .hero-stats { display: flex; justify-content: center; gap: 60px; }
+        .hero-stat .value { font-size: 2.5rem; font-weight: 800; color: var(--neon); }
+        .hero-stat .label { font-size: 0.9rem; color: var(--text-dim); }
+        
+        /* Categories */
+        .categories { padding: 30px 0; border-bottom: 1px solid var(--border); overflow-x: auto; }
+        .categories-list { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .cat-btn { padding: 12px 25px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 25px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; white-space: nowrap; }
+        .cat-btn:hover, .cat-btn.active { border-color: var(--neon); background: rgba(238, 255, 0, 0.1); color: var(--neon); }
+        
+        /* Products */
+        .products-section { padding: 50px 0; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .section-header h2 { font-size: 1.8rem; }
+        .filters { display: flex; gap: 15px; }
+        .filter-select { padding: 10px 20px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 10px; font-size: 0.9rem; cursor: pointer; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .product-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+        .product-card:hover { border-color: var(--ai-blue); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        
+        .product-image { height: 200px; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; overflow: hidden; }
+        .product-image::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%); }
+        .product-badge { position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .product-badge.free { background: var(--success); color: #000; }
+        .product-badge.premium { background: var(--neon); color: #000; }
+        .product-badge.ai { background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple)); color: #fff; }
+        .product-badge.new { background: var(--warning); color: #000; }
+        .product-badge.sale { background: #ff4444; color: #fff; }
+        
+        .product-info { padding: 20px; }
+        .product-info h4 { font-size: 1.1rem; margin-bottom: 8px; }
+        .product-info p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 15px; line-height: 1.5; }
+        .product-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid var(--border); }
+        .product-price { font-size: 1.3rem; font-weight: 700; color: var(--neon); }
+        .product-price.free { color: var(--success); }
+        .product-price .old { text-decoration: line-through; color: var(--text-dim); font-size: 0.9rem; margin-right: 8px; }
+        .product-rating { display: flex; align-items: center; gap: 5px; font-size: 0.85rem; }
+        .product-rating .stars { color: var(--warning); }
+        .product-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .product-actions button { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .product-actions .preview { background: var(--dark); color: var(--text); border: 1px solid var(--border); }
+        .product-actions .preview:hover { border-color: var(--neon); }
+        .product-actions .buy { background: var(--neon); color: #000; }
+        .product-actions .buy:hover { background: #ddee00; }
+        .product-actions .buy.free-btn { background: var(--success); }
+        
+        /* Featured Bundles */
+        .bundles-section { padding: 60px 0; background: var(--darker); }
+        .bundles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .bundle-card { background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(170, 102, 255, 0.05)); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 20px; padding: 30px; display: flex; gap: 25px; align-items: center; transition: all 0.3s; }
+        .bundle-card:hover { border-color: var(--ai-blue); transform: translateY(-3px); }
+        .bundle-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; }
+        .bundle-info h4 { font-size: 1.2rem; margin-bottom: 8px; }
+        .bundle-info p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 12px; }
+        .bundle-info .price { font-size: 1.3rem; font-weight: 700; color: var(--neon); }
+        .bundle-info .price .save { font-size: 0.8rem; color: var(--success); margin-left: 10px; }
+        
+        /* Sell Section */
+        .sell-section { padding: 80px 0; }
+        .sell-box { background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(238, 255, 0, 0.05)); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 25px; padding: 60px; display: flex; align-items: center; gap: 60px; }
+        .sell-content { flex: 1; }
+        .sell-content h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .sell-content p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 25px; }
+        .sell-stats { display: flex; gap: 40px; margin-bottom: 25px; }
+        .sell-stat .value { font-size: 2rem; font-weight: 800; color: var(--success); }
+        .sell-stat .label { font-size: 0.85rem; color: var(--text-dim); }
+        .sell-visual { text-align: center; }
+        .sell-visual .icon { font-size: 8rem; }
+        
+        footer { padding: 50px 0; border-top: 1px solid var(--border); text-align: center; }
+        footer p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 10px; }
+        footer a { color: var(--ai-blue); text-decoration: none; }
+        .mars { color: var(--neon); font-size: 1.5rem; margin-top: 15px; }
+        
+        @media (max-width: 1200px) { .products-grid { grid-template-columns: repeat(3, 1fr); } .bundles-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .products-grid { grid-template-columns: 1fr; } .bundles-grid { grid-template-columns: 1fr; } .sell-box { flex-direction: column; text-align: center; } .search-box { display: none; } .hero h1 { font-size: 2.5rem; } .hero-stats { flex-wrap: wrap; gap: 30px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🛍️</div>
+                    <span>Domis</span>Shop
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search themes, plugins, templates..." id="searchInput">
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="btn btn-cart">🛒 Cart <span class="badge">0</span></a>
+                    <a href="#" class="btn btn-primary">📦 Sell Your Product</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Premium <span class="highlight">Marketplace</span></h1>
+            <p>Themes, plugins, and templates to supercharge your DomisLink website</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="value">2,500+</div>
+                    <div class="label">Products</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">500+</div>
+                    <div class="label">Developers</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">50K+</div>
+                    <div class="label">Downloads</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">99%</div>
+                    <div class="label">AI-Compatible</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <div class="categories-list">
+                <button class="cat-btn active">🌟 All</button>
+                <button class="cat-btn">🎨 Themes</button>
+                <button class="cat-btn">🔌 Plugins</button>
+                <button class="cat-btn">📄 Templates</button>
+                <button class="cat-btn">🛒 E-Commerce</button>
+                <button class="cat-btn">📚 Education</button>
+                <button class="cat-btn">🤖 AI Tools</button>
+                <button class="cat-btn">📊 Analytics</button>
+                <button class="cat-btn">🔒 Security</button>
+                <button class="cat-btn">💰 Free</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🔥 Popular Products</h2>
+                <div class="filters">
+                    <select class="filter-select">
+                        <option>Most Popular</option>
+                        <option>Newest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Best Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">🏢<span class="product-badge premium">PREMIUM</span></div>
+                    <div class="product-info">
+                        <h4>Business Pro Theme</h4>
+                        <p>Modern corporate theme with 50+ pages, dark mode, and AI integration</p>
+                        <div class="product-meta">
+                            <span class="product-price">₦15,000</span>
+                            <span class="product-rating"><span class="stars">★★★★★</span> 4.9</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">🛒<span class="product-badge ai">AI-POWERED</span></div>
+                    <div class="product-info">
+                        <h4>Smart E-Commerce</h4>
+                        <p>AI-powered store with Paystack, OPay integration & smart recommendations</p>
+                        <div class="product-meta">
+                            <span class="product-price">₦25,000</span>
+                            <span class="product-rating"><span class="stars">★★★★★</span> 4.8</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">📚<span class="product-badge new">NEW</span></div>
+                    <div class="product-info">
+                        <h4>LMS Course Builder</h4>
+                        <p>Complete learning management system with WAEC, NECO curriculum support</p>
+                        <div class="product-meta">
+                            <span class="product-price">₦35,000</span>
+                            <span class="product-rating"><span class="stars">★★★★★</span> 4.9</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 - FREE -->
+                <div class="product-card">
+                    <div class="product-image">🔒<span class="product-badge free">FREE</span></div>
+                    <div class="product-info">
+                        <h4>Security Starter Kit</h4>
+                        <p>Essential security tools: WAF, malware scan, login protection</p>
+                        <div class="product-meta">
+                            <span class="product-price free">FREE</span>
+                            <span class="product-rating"><span class="stars">★★★★☆</span> 4.5</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy free-btn">Install Free</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">📊<span class="product-badge ai">AI-POWERED</span></div>
+                    <div class="product-info">
+                        <h4>AI Analytics Pro</h4>
+                        <p>AI-driven insights, heatmaps, predictions & visitor intelligence</p>
+                        <div class="product-meta">
+                            <span class="product-price">₦20,000</span>
+                            <span class="product-rating"><span class="stars">★★★★★</span> 4.7</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 - SALE -->
+                <div class="product-card">
+                    <div class="product-image">📧<span class="product-badge sale">50% OFF</span></div>
+                    <div class="product-info">
+                        <h4>Email Marketing Suite</h4>
+                        <p>Newsletters, automation, templates & analytics dashboard</p>
+                        <div class="product-meta">
+                            <span class="product-price"><span class="old">₦36,000</span>₦18,000</span>
+                            <span class="product-rating"><span class="stars">★★★★☆</span> 4.6</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 - FREE -->
+                <div class="product-card">
+                    <div class="product-image">🏠<span class="product-badge free">FREE</span></div>
+                    <div class="product-info">
+                        <h4>Real Estate Theme</h4>
+                        <p>Property listings, agent profiles, search filters & maps</p>
+                        <div class="product-meta">
+                            <span class="product-price free">FREE</span>
+                            <span class="product-rating"><span class="stars">★★★★☆</span> 4.4</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy free-btn">Install Free</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-image">🤖<span class="product-badge ai">AI-POWERED</span></div>
+                    <div class="product-info">
+                        <h4>AI Chatbot Builder</h4>
+                        <p>Create custom AI chatbots with Claude, GPT-4 & local models</p>
+                        <div class="product-meta">
+                            <span class="product-price">₦30,000</span>
+                            <span class="product-rating"><span class="stars">★★★★★</span> 4.9</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="preview">Preview</button>
+                            <button class="buy">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bundles-section">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>⭐ Featured Bundles</h2>
+            </div>
+            <div class="bundles-grid">
+                <div class="bundle-card">
+                    <div class="bundle-icon">🇳🇬</div>
+                    <div class="bundle-info">
+                        <h4>Nigerian Business Bundle</h4>
+                        <p>Themes + plugins optimized for Nigerian businesses with Naira payments</p>
+                        <span class="price">₦45,000 <span class="save">Save 40%</span></span>
+                    </div>
+                </div>
+                <div class="bundle-card">
+                    <div class="bundle-icon">📚</div>
+                    <div class="bundle-info">
+                        <h4>Education Starter Pack</h4>
+                        <p>Complete LMS, quiz builder, certificates & student portal</p>
+                        <span class="price">₦55,000 <span class="save">Save 35%</span></span>
+                    </div>
+                </div>
+                <div class="bundle-card">
+                    <div class="bundle-icon">🛒</div>
+                    <div class="bundle-info">
+                        <h4>E-Commerce Complete</h4>
+                        <p>Full store setup with AI recommendations & multi-vendor support</p>
+                        <span class="price">₦65,000 <span class="save">Save 50%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sell-section">
+        <div class="container">
+            <div class="sell-box">
+                <div class="sell-content">
+                    <h2>💰 Sell Your Creations</h2>
+                    <p>Join our marketplace and earn money selling themes, plugins, and templates to thousands of DomisLink users</p>
+                    <div class="sell-stats">
+                        <div class="sell-stat">
+                            <div class="value">70%</div>
+                            <div class="label">Revenue Share</div>
+                        </div>
+                        <div class="sell-stat">
+                            <div class="value">₦0</div>
+                            <div class="label">Listing Fee</div>
+                        </div>
+                        <div class="sell-stat">
+                            <div class="value">Weekly</div>
+                            <div class="label">Payouts</div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">📦 Start Selling Today</a>
+                </div>
+                <div class="sell-visual">
+                    <div class="icon">💎</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>DomisLink International Business Lagos Nig Ltd</p>
+            <p>shop.domislink.com | <a href="https://domislink.com">Main Site</a> | <a href="https://host.domislink.com">Hosting</a></p>
+            <div class="mars">Head to Mars 🚀</div>
+        </div>
+    </footer>
+
+    <script>
+        // Category filter
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(card => {
+                const title = card.querySelector('h4').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                if (title.includes(query) || desc.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = query ? 'none' : 'block';
+                }
+            });
+        });
+
+        // Add to cart simulation
+        let cartCount = 0;
+        document.querySelectorAll('.buy').forEach(btn => {
+            btn.addEventListener('click', () => {
+                cartCount++;
+                document.querySelector('.btn-cart .badge').textContent = cartCount;
+                btn.textContent = '✓ Added';
+                btn.style.background = '#00ff88';
+                setTimeout(() => {
+                    btn.textContent = btn.classList.contains('free-btn') ? 'Install Free' : 'Buy Now';
+                    btn.style.background = btn.classList.contains('free-btn') ? '#00ff88' : '#EEFF00';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

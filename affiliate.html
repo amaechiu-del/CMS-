@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Program - DomisLink | Earn Commissions</title>
+    <style>
+        :root { --neon: #EEFF00; --dark: #0a0a0a; --darker: #050505; --card: #111; --border: #222; --text: #fff; --text-dim: #888; --success: #00ff88; --warning: #ffaa00; --ai-blue: #00d4ff; --ai-purple: #aa66ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        
+        header { padding: 20px 0; border-bottom: 1px solid var(--border); background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        .logo span { color: var(--neon); }
+        .btn { padding: 12px 25px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--neon); color: #000; }
+        .btn-success { background: var(--success); color: #000; }
+        
+        .hero { padding: 100px 0; text-align: center; background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.1), transparent 50%), radial-gradient(circle at 70% 50%, rgba(238, 255, 0, 0.1), transparent 50%); }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(238, 255, 0, 0.1)); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 50px; font-size: 1rem; color: var(--success); margin-bottom: 30px; font-weight: 600; }
+        .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 25px; line-height: 1.1; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--success), var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 700px; margin: 0 auto 40px; }
+        .hero-cta { display: flex; justify-content: center; gap: 20px; margin-bottom: 60px; }
+        .hero-stats { display: flex; justify-content: center; gap: 80px; }
+        .hero-stat .value { font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, var(--success), var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-stat .label { font-size: 1rem; color: var(--text-dim); margin-top: 5px; }
+        
+        .commission-section { padding: 80px 0; }
+        .commission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .commission-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s; }
+        .commission-card:hover { border-color: var(--success); transform: translateY(-5px); }
+        .commission-card .icon { font-size: 3.5rem; margin-bottom: 20px; }
+        .commission-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .commission-card .rate { font-size: 4rem; font-weight: 800; color: var(--success); margin: 20px 0; }
+        .commission-card .rate span { font-size: 1.5rem; }
+        .commission-card p { color: var(--text-dim); font-size: 0.95rem; }
+        .commission-card .earning { margin-top: 20px; padding: 15px; background: rgba(0, 255, 136, 0.1); border-radius: 10px; }
+        .commission-card .earning .label { font-size: 0.8rem; color: var(--text-dim); }
+        .commission-card .earning .amount { font-size: 1.5rem; font-weight: 700; color: var(--neon); }
+        
+        .how-section { padding: 80px 0; background: var(--darker); }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .step-card { text-align: center; position: relative; }
+        .step-card::after { content: '→'; position: absolute; right: -20px; top: 30px; font-size: 2rem; color: var(--border); }
+        .step-card:last-child::after { display: none; }
+        .step-num { width: 70px; height: 70px; background: linear-gradient(135deg, var(--success), var(--neon)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #000; margin: 0 auto 20px; }
+        .step-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
+        .step-card p { font-size: 0.9rem; color: var(--text-dim); }
+        
+        .benefits-section { padding: 80px 0; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .benefit-card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 30px; display: flex; gap: 20px; }
+        .benefit-card:hover { border-color: var(--neon); }
+        .benefit-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(238, 255, 0, 0.1)); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+        .benefit-info h4 { margin-bottom: 8px; }
+        .benefit-info p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+        
+        .dashboard-section { padding: 80px 0; background: var(--darker); }
+        .dashboard-preview { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; max-width: 1000px; margin: 0 auto; }
+        .dashboard-header { padding: 20px 30px; background: var(--darker); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .dashboard-body { padding: 30px; }
+        .dashboard-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        .dash-stat { background: var(--dark); border-radius: 12px; padding: 20px; text-align: center; }
+        .dash-stat .value { font-size: 2rem; font-weight: 700; color: var(--success); }
+        .dash-stat .label { font-size: 0.8rem; color: var(--text-dim); margin-top: 5px; }
+        .referral-link { background: var(--dark); border-radius: 10px; padding: 20px; display: flex; gap: 15px; align-items: center; }
+        .referral-link input { flex: 1; padding: 15px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--neon); font-size: 0.95rem; }
+        .referral-link button { padding: 15px 25px; background: var(--success); color: #000; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        
+        .payout-section { padding: 80px 0; }
+        .payout-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .payout-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; text-align: center; }
+        .payout-card .icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .payout-card h4 { margin-bottom: 8px; }
+        .payout-card p { font-size: 0.85rem; color: var(--text-dim); }
+        
+        .testimonials-section { padding: 80px 0; background: var(--darker); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 30px; }
+        .testimonial-card .quote { font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; color: var(--text-dim); }
+        .testimonial-card .author { display: flex; align-items: center; gap: 15px; }
+        .testimonial-card .avatar { width: 50px; height: 50px; background: linear-gradient(135deg, var(--ai-blue), var(--ai-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .testimonial-card .name { font-weight: 600; }
+        .testimonial-card .earning { font-size: 0.85rem; color: var(--success); }
+        
+        .cta-section { padding: 80px 0; }
+        .cta-box { background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(238, 255, 0, 0.1)); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 30px; padding: 80px; text-align: center; }
+        .cta-box h2 { font-size: 3rem; margin-bottom: 20px; }
+        .cta-box p { color: var(--text-dim); font-size: 1.2rem; margin-bottom: 30px; }
+        
+        footer { padding: 50px 0; border-top: 1px solid var(--border); text-align: center; }
+        footer p { color: var(--text-dim); font-size: 0.9rem; }
+        .mars { color: var(--neon); font-size: 1.5rem; margin-top: 15px; }
+        
+        @media (max-width: 1200px) { .commission-grid { grid-template-columns: repeat(2, 1fr); } .steps-grid { grid-template-columns: repeat(2, 1fr); } .step-card::after { display: none; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .hero-stats { flex-direction: column; gap: 30px; } .commission-grid, .benefits-grid, .payout-grid, .testimonials-grid { grid-template-columns: 1fr; } .dashboard-stats { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">💸 <span>Domis</span>Link Affiliates</div>
+                <div style="display: flex; gap: 15px;">
+                    <a href="pricing.html" class="btn" style="background: var(--card); color: var(--text); border: 1px solid var(--border);">Pricing</a>
+                    <a href="#" class="btn btn-success">🚀 Join Now - It's Free</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <div class="hero-badge">💰 Earn Up To ₦100,000+ Per Referral</div>
+            <h1>Earn <span class="highlight">30% Commission</span><br>For Life</h1>
+            <p>Refer customers to DomisLink and earn recurring commissions on every payment they make. Forever.</p>
+            <div class="hero-cta">
+                <a href="#" class="btn btn-success">🚀 Join Affiliate Program</a>
+                <a href="#" class="btn" style="background: var(--card); color: var(--text); border: 1px solid var(--border);">📊 Login to Dashboard</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="value">30%</div>
+                    <div class="label">Commission Rate</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">Lifetime</div>
+                    <div class="label">Recurring</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">₦5,000</div>
+                    <div class="label">Min Payout</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="value">2,000+</div>
+                    <div class="label">Active Affiliates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="commission-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>💰 Commission Structure</h2>
+                <p>Earn more as you refer more customers</p>
+            </div>
+            <div class="commission-grid">
+                <div class="commission-card">
+                    <div class="icon">🌱</div>
+                    <h3>Starter</h3>
+                    <div class="rate">20<span>%</span></div>
+                    <p>0-10 referrals per month</p>
+                    <div class="earning">
+                        <div class="label">Avg. Earning Per Referral</div>
+                        <div class="amount">₦1,500 - ₦15,000</div>
+                    </div>
+                </div>
+                <div class="commission-card" style="border-color: var(--success);">
+                    <div class="icon">🚀</div>
+                    <h3>Pro Affiliate</h3>
+                    <div class="rate">25<span>%</span></div>
+                    <p>11-50 referrals per month</p>
+                    <div class="earning">
+                        <div class="label">Avg. Earning Per Referral</div>
+                        <div class="amount">₦1,875 - ₦18,750</div>
+                    </div>
+                </div>
+                <div class="commission-card">
+                    <div class="icon">👑</div>
+                    <h3>Super Affiliate</h3>
+                    <div class="rate">30<span>%</span></div>
+                    <p>50+ referrals per month</p>
+                    <div class="earning">
+                        <div class="label">Avg. Earning Per Referral</div>
+                        <div class="amount">₦2,250 - ₦22,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 How It Works</h2>
+                <p>Start earning in 4 simple steps</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h4>Sign Up Free</h4>
+                    <p>Create your free affiliate account in 30 seconds</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h4>Get Your Link</h4>
+                    <p>Receive your unique referral link and promo materials</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h4>Share & Refer</h4>
+                    <p>Share your link on social media, blogs, or with friends</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h4>Earn Forever</h4>
+                    <p>Get paid 30% commission on every payment, forever</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>✨ Affiliate Benefits</h2>
+                <p>Everything you need to succeed</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <div class="benefit-info">
+                        <h4>Lifetime Recurring Commissions</h4>
+                        <p>Earn commissions not just on the first sale, but on EVERY payment your referrals make. Forever.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🍪</div>
+                    <div class="benefit-info">
+                        <h4>90-Day Cookie Duration</h4>
+                        <p>If someone clicks your link, you get credit for any purchase they make within 90 days.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-info">
+                        <h4>Real-Time Dashboard</h4>
+                        <p>Track clicks, signups, conversions, and earnings in real-time with detailed analytics.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎨</div>
+                    <div class="benefit-info">
+                        <h4>Marketing Materials</h4>
+                        <p>Banners, email templates, social media posts, and landing pages ready to use.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💳</div>
+                    <div class="benefit-info">
+                        <h4>Multiple Payout Options</h4>
+                        <p>Get paid via bank transfer, Paystack, OPay, or PayPal. Minimum payout: ₦5,000.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <div class="benefit-info">
+                        <h4>Dedicated Support</h4>
+                        <p>Get help from our affiliate team via email, WhatsApp, or live chat. We want you to succeed!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>📊 Affiliate Dashboard</h2>
+                <p>Track your earnings and performance in real-time</p>
+            </div>
+            <div class="dashboard-preview">
+                <div class="dashboard-header">
+                    <span style="font-weight: 600;">👋 Welcome, Affiliate!</span>
+                    <span style="color: var(--success);">● Pro Affiliate (25% commission)</span>
+                </div>
+                <div class="dashboard-body">
+                    <div class="dashboard-stats">
+                        <div class="dash-stat">
+                            <div class="value">₦247,500</div>
+                            <div class="label">Total Earned</div>
+                        </div>
+                        <div class="dash-stat">
+                            <div class="value">45</div>
+                            <div class="label">Total Referrals</div>
+                        </div>
+                        <div class="dash-stat">
+                            <div class="value">₦32,500</div>
+                            <div class="label">This Month</div>
+                        </div>
+                        <div class="dash-stat">
+                            <div class="value">12.5%</div>
+                            <div class="label">Conversion Rate</div>
+                        </div>
+                    </div>
+                    <div class="referral-link">
+                        <input type="text" value="https://domislink.com/?ref=yourname" readonly>
+                        <button>📋 Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payout-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>💳 Payout Methods</h2>
+                <p>Get paid your way, weekly or monthly</p>
+            </div>
+            <div class="payout-grid">
+                <div class="payout-card">
+                    <div class="icon">🏦</div>
+                    <h4>Bank Transfer</h4>
+                    <p>Direct to any Nigerian bank account</p>
+                </div>
+                <div class="payout-card">
+                    <div class="icon">💳</div>
+                    <h4>Paystack</h4>
+                    <p>Instant payout to your Paystack</p>
+                </div>
+                <div class="payout-card">
+                    <div class="icon">📱</div>
+                    <h4>OPay</h4>
+                    <p>Instant to OPay wallet</p>
+                </div>
+                <div class="payout-card">
+                    <div class="icon">🅿️</div>
+                    <h4>PayPal</h4>
+                    <p>For international affiliates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>💬 What Affiliates Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote">"I've been an affiliate for 6 months and already earned over ₦500,000. The recurring commissions are amazing!"</div>
+                    <div class="author">
+                        <div class="avatar">👨</div>
+                        <div>
+                            <div class="name">Chidi Okonkwo</div>
+                            <div class="earning">Earned: ₦547,000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"As a blogger, I recommend DomisLink to my readers. The 90-day cookie means I earn from sales weeks later."</div>
+                    <div class="author">
+                        <div class="avatar">👩</div>
+                        <div>
+                            <div class="name">Amaka Johnson</div>
+                            <div class="earning">Earned: ₦320,000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"The dashboard is so easy to use. I can see exactly how much I'm earning in real-time. Weekly payouts are a plus!"</div>
+                    <div class="author">
+                        <div class="avatar">👨</div>
+                        <div>
+                            <div class="name">Tunde Bakare</div>
+                            <div class="earning">Earned: ₦189,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to Start Earning?</h2>
+                <p>Join 2,000+ affiliates earning recurring commissions with DomisLink</p>
+                <a href="#" class="btn btn-success" style="font-size: 1.1rem; padding: 18px 40px;">🚀 Join Affiliate Program - It's FREE</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>DomisLink International Business Lagos Nig Ltd</p>
+            <p>Affiliate Program - Earn 30% Lifetime Commissions</p>
+            <div class="mars">Head to Mars 🚀</div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "domislink-cms",
+  "version": "1.0.0",
+  "description": "DomisLink CMS - Zero maintenance content management",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["cms", "domislink", "content-management"],
+  "author": "DomisLink International Business Lagos Nig Ltd",
+  "license": "MIT"
+}

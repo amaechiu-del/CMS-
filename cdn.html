@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CDN Manager - DomisLink CMS | Global Edge Network</title>
+    <style>
+        :root { --neon: #EEFF00; --dark: #0a0a0a; --card: #111; --border: #222; --text: #fff; --text-dim: #888; --success: #00ff88; --ai-blue: #00d4ff; --ai-purple: #aa66ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+        .sidebar { width: 260px; background: #050505; border-right: 1px solid var(--border); padding: 20px; position: fixed; height: 100vh; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--ai-blue); margin-bottom: 30px; }
+        .nav-item { display: block; padding: 12px 15px; border-radius: 10px; color: var(--text-dim); text-decoration: none; margin-bottom: 5px; }
+        .nav-item:hover { background: rgba(0, 212, 255, 0.1); }
+        .nav-item.active { background: var(--ai-blue); color: #000; }
+        .main { margin-left: 260px; padding: 30px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .header h1 { font-size: 1.8rem; }
+        .btn { padding: 12px 20px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; background: var(--ai-blue); color: #000; }
+        
+        .speed-panel { background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.02)); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 20px; padding: 40px; margin-bottom: 30px; text-align: center; }
+        .speed-panel h2 { font-size: 4rem; font-weight: 800; color: var(--ai-blue); margin-bottom: 10px; }
+        .speed-panel p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; text-align: center; }
+        .stat-card .value { font-size: 2rem; font-weight: 700; color: var(--ai-blue); }
+        .stat-card .label { color: var(--text-dim); font-size: 0.85rem; margin-top: 5px; }
+        
+        .edge-map { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 30px; margin-bottom: 30px; }
+        .edge-map h3 { margin-bottom: 20px; }
+        .map-placeholder { height: 300px; background: linear-gradient(135deg, var(--dark), var(--card)); border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .map-placeholder .globe { font-size: 8rem; opacity: 0.3; }
+        .map-placeholder .overlay { position: absolute; text-align: center; }
+        .map-placeholder .overlay h4 { font-size: 1.5rem; color: var(--ai-blue); }
+        .map-placeholder .overlay p { color: var(--text-dim); }
+        
+        .regions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .region-item { background: var(--dark); border-radius: 10px; padding: 15px; display: flex; align-items: center; gap: 12px; }
+        .region-item .dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .region-item .info h5 { font-size: 0.9rem; }
+        .region-item .info span { font-size: 0.75rem; color: var(--text-dim); }
+        
+        .cache-section { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; }
+        .card h3 { margin-bottom: 20px; }
+        .cache-item { display: flex; justify-content: space-between; padding: 12px; background: var(--dark); border-radius: 8px; margin-bottom: 10px; }
+        .cache-item .type { display: flex; align-items: center; gap: 10px; }
+        .cache-item .rate { color: var(--success); font-weight: 600; }
+        
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .cache-section { grid-template-columns: 1fr; } .regions-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; } }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">⚡ CDN Manager</div>
+        <a href="index.html" class="nav-item">📊 Dashboard</a>
+        <a href="ai-dashboard.html" class="nav-item">🤖 AI Activity</a>
+        <a href="builder.html" class="nav-item">🎨 Website Builder</a>
+        <a href="hosting.html" class="nav-item">🌐 Hosting</a>
+        <a href="domains.html" class="nav-item">🔗 Domains</a>
+        <a href="ssl.html" class="nav-item">🔒 SSL Manager</a>
+        <a href="cdn.html" class="nav-item active">⚡ CDN</a>
+        <a href="backup.html" class="nav-item">💾 Backups</a>
+        <a href="security.html" class="nav-item">🛡️ Security</a>
+        <a href="seo.html" class="nav-item">🔍 SEO Manager</a>
+    </aside>
+    
+    <main class="main">
+        <div class="header">
+            <h1>⚡ AI CDN Manager</h1>
+            <button class="btn">🔄 Purge Cache</button>
+        </div>
+        
+        <div class="speed-panel">
+            <h2>&lt;50ms</h2>
+            <p>Global Average Latency • AI-Optimized Routing • 300+ Edge Locations</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">300+</div>
+                <div class="label">Edge Locations</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">98.7%</div>
+                <div class="label">Cache Hit Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">2.4TB</div>
+                <div class="label">Bandwidth Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">99.99%</div>
+                <div class="label">Uptime</div>
+            </div>
+        </div>
+        
+        <div class="edge-map">
+            <h3>🌍 Global Edge Network</h3>
+            <div class="map-placeholder">
+                <span class="globe">🌍</span>
+                <div class="overlay">
+                    <h4>300+ Edge Locations</h4>
+                    <p>Content served from nearest location • AI auto-routing</p>
+                </div>
+            </div>
+            <div class="regions-grid">
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🌍 Africa</h5><span>Lagos, Cairo, Johannesburg • 23ms</span></div>
+                </div>
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🌎 Americas</h5><span>New York, São Paulo, LA • 18ms</span></div>
+                </div>
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🌏 Asia Pacific</h5><span>Tokyo, Singapore, Sydney • 25ms</span></div>
+                </div>
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🇪🇺 Europe</h5><span>London, Frankfurt, Paris • 15ms</span></div>
+                </div>
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🇮🇳 India</h5><span>Mumbai, Delhi, Bangalore • 28ms</span></div>
+                </div>
+                <div class="region-item">
+                    <div class="dot"></div>
+                    <div class="info"><h5>🌐 Middle East</h5><span>Dubai, Tel Aviv • 32ms</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cache-section">
+            <div class="card">
+                <h3>📊 Cache Performance (AI-Optimized)</h3>
+                <div class="cache-item">
+                    <div class="type"><span>🖼️</span> Images</div>
+                    <div class="rate">99.2% hit rate</div>
+                </div>
+                <div class="cache-item">
+                    <div class="type"><span>📄</span> HTML</div>
+                    <div class="rate">97.8% hit rate</div>
+                </div>
+                <div class="cache-item">
+                    <div class="type"><span>🎨</span> CSS</div>
+                    <div class="rate">99.5% hit rate</div>
+                </div>
+                <div class="cache-item">
+                    <div class="type"><span>⚙️</span> JavaScript</div>
+                    <div class="rate">98.9% hit rate</div>
+                </div>
+                <div class="cache-item">
+                    <div class="type"><span>🎥</span> Video</div>
+                    <div class="rate">96.3% hit rate</div>
+                </div>
+                <div class="cache-item">
+                    <div class="type"><span>📦</span> API Responses</div>
+                    <div class="rate">94.1% hit rate</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🤖 AI CDN Features</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="padding: 15px; background: var(--dark); border-radius: 10px;">
+                        <strong>Auto Image Optimization</strong>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">WebP/AVIF conversion, compression, resizing</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--dark); border-radius: 10px;">
+                        <strong>Smart Cache Rules</strong>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">AI determines optimal TTL for each asset</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--dark); border-radius: 10px;">
+                        <strong>Predictive Pre-fetch</strong>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">AI pre-caches content before requests</p>
+                    </div>
+                    <div style="padding: 15px; background: var(--dark); border-radius: 10px;">
+                        <strong>DDoS Protection</strong>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">Edge-level attack mitigation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
